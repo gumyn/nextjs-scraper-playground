@@ -20,11 +20,13 @@ ${getResultPropertyAssignment(property, url)}
 
 const getResultPropertyAssignment = (property, url) => {
   if (property.type === "href") {
-    return `    let href = $(elem).attr("href")
+    return `      let href = $(elem).attr("href")
       if (href.charAt(0) === "/") href = "${url}" + href
         result[i].${property.name} = href`
-  } else {
+  } if (property.type === "text") {
     return `        result[i].${property.name} = $(elem).text()`
+  } else {
+    return `        result[i].${property.name} = $(elem).attr("${property.type}")`
   }
 }
 

@@ -24,6 +24,7 @@ const Property = ({
   const [propertyName, setPropertyName] = useState("")
   const [propertySelector, setPropertySelector] = useState("")
   const [propertyType, setPropertyType] = useState("text")
+  const propertyTypes = ["text","href","value","src"]
 
   return (
     <>
@@ -67,7 +68,23 @@ const Property = ({
           <div>
             <label htmlFor="propertyType">Type</label>
           </div>
-          <select
+          <input
+            type="text"
+            list="cars"
+            className="propertyType"
+            name="propertyType"
+            value={propertyType}
+            onChange={(e) => {
+              setPropertyType(e.target.value)
+              onChange(index, propertyName, propertySelector, e.target.value)
+            }}
+          />
+          <datalist id="cars">
+            {propertyTypes.map((item) =>
+              <option value={item} />
+            )}
+          </datalist>
+          {/* <select
             className="propertyType"
             name="propertyType"
             value={propertyType}
@@ -78,7 +95,9 @@ const Property = ({
           >
             <option value="text">text</option>
             <option value="href">href</option>
-          </select>
+            <option value="value">value</option>
+            <option value="src">src</option>
+          </select> */}
         </div>
         <div className="property-delete">
           {canDelete && (
@@ -118,11 +137,11 @@ const Property = ({
           padding-right: 4px;
         }
         .property-selector {
-          width: 55%;
+          width: 45%;
           padding-left: 4px;
         }
         .property-type {
-          width: 15%;
+          width: 25%;
           padding-left: 8px;
         }
         .property-delete {

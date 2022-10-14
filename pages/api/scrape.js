@@ -125,11 +125,22 @@ const scrape = async (req, res) => {
                 }
                 result[i][property.name] = href
               }
-            } else {
+            } if (property.type === "text") {
               result[i][property.name] = $(elem)
                 .text()
                 .replace(/\r?\n|\r/g, "")
                 .trim()
+            } else {
+              try {
+                result[i][property.name] = $(elem).attr(property.type)
+              } catch(e) {
+                console.error("error: "+e);
+              }
+              try {
+                result[i][property.name] = $(elem)[property.type]
+              } catch(e) {
+                console.error("error: "+e);
+              }
             }
           })
       })

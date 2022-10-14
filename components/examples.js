@@ -27,6 +27,17 @@ const SelectExample = ({ onSelect }) => {
     //     },
     //   ],
     // },
+     {
+      name: "Google",
+      url: "https://www.google.com/",
+      properties: [
+        {
+          name: "title",
+          selector: "#sidebar > div.module.sidebar-related > div > div:nth-child(3) > a:nth-child(1) > div",
+          type: "tagName",
+        },
+      ],
+    },
     {
       name: "Trending on Github",
       url: "https://github.com/trending",
